@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <title>primer ejemplo con vue</title>
+  
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h1><strong> Primera pantalla con VueJs</strong></h1>
+        <div id="app">
+          <table class="table ">
+            <thead>
+              <tr>
+                <th style="width:30px;"></th>
+                <th>Fruta</th>
+                <th style="width:210px;">precio</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td>
+                  <input type="text" class="formulario-control" v-model="newEntry.nombre" />
+                </td>
+                <td>
+                  <input type="text" class="formulario-control" v-model="newEntry.cantidad" />
+                </td>
+                <td>
+                  <button @click="agregar()" type="button" class="btn">Añadir</button>
+                </td>
+              </tr>
+              <tr v-if="articulos.length === 0">
+                <td  class="text-center">
+                  No hay registros por mostrar
+                </td>
+              </tr>
+				
+              <tr v-for="articulo, indice in articulos">
+                <td>
+                  <button 
+                    @click="remove(indice)"
+                    type="button" class="btn btn-danger btn-xs">
+                    
+                  </button>
+                </td>
+                <td>{{ articulo.nombre }}</td>
+                <td>{{ articulo.cantidad.toFixed(2) }}</td>
+                <td class="text-center" >
+                                  </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              
+              <tr class="text-info">
+                <td></td>
+                <td class="text-right">Total</td>
+                <td>{{ precioTotal() }}</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    var app = new Vue({
+      el: '#app', // Elemento
+      data: { // Parametros
+        newEntry: {
+          nombre: '',
+          cantidad: 0
+        },
+        articulos: [{
+            nombre: 'manzana',
+            cantidad: 0.50,
+            
+          },
+          {
+            nombre: 'pera',
+            cantidad: 0.75,
+           
+          },
+        ]
+      },
+      methods: {
+        remove: function(indice) {
+          this.articulos.splice(indice, 1);
+        },
+       
+        agregar() {
+          this.articulos.push({
+            nombre: this.newEntry.nombre,
+            cantidad: parseFloat(this.newEntry.cantidad),
+            paid: false
+          });
+
+          this.newEntry.nombre = '';
+          this.newEntry.cantidad = 0;
+        },
+      
+        precioTotal(){
+            var total = this.articulos.reduce(function(a, b) {
+              
+                return a + b.cantidad;
+              
+            }, 0);
+
+            return total.toFixed(2);
+        }
+      }
+    });
+  </script>
+</body>
+</html>
