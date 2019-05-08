@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::resource('fruits', 'FruitsController');
 Route::resource('recipes', 'RecipesController');
+Route::resource('login', 'LoginController');
