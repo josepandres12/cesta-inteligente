@@ -1,1 +1,4 @@
+con direccion ip
 https://www.youtube.com/watch?v=FkdU1sJl7N0
+con coneccion a la base de datos
+https://www.youtube.com/watch?v=_x06prMxj1k
